@@ -8,10 +8,15 @@ import java.util.PriorityQueue;
  *
  * Etapas implementadas:
  *   1) Gerador de numeros pseudoaleatorios pelo Metodo Congruente Linear (LCG)
- *      e a funcao NextRandom() normalizada em [0,1).
+ *      e a funcao nextRandom() normalizada em [0,1).
  *   2) Escalonador de eventos (chegada / saida) via fila de prioridade por tempo.
  *   3) Laco principal na main() com criterio de parada por consumo de aleatorios.
  *   4) Distribuicao de probabilidade dos estados + tempos acumulados + perdas.
+ *
+ * Parametros das filas (reentrega M4):
+ *   1) G/G/1/5  chegadas 3..5  atendimento 4..5
+ *   2) G/G/2/5  chegadas 3..5  atendimento 4..5
+ *   Primeiro cliente chega no tempo 3.0 nos dois casos.
  */
 public class SimuladorFila {
 
@@ -33,7 +38,7 @@ public class SimuladorFila {
     // ----------------- Configuracao da fila em simulacao ----------------------
     static int servidores;      // c
     static int capacidade;      // K (capacidade total do sistema)
-    static double chegadaMin, chegadaMax;      // intervalo entre chegadas
+    static double chegadaMin, chegadaMax;         // intervalo entre chegadas
     static double atendimentoMin, atendimentoMax; // tempo de atendimento
 
     // ----------------- Escalonador --------------------------------------------
@@ -156,10 +161,10 @@ public class SimuladorFila {
         final long ALEATORIOS = 100_000;
         final double PRIMEIRA_CHEGADA = 3.0;
 
-        simular("G/G/1/5 (chegada 2..5, atend. 3..5)", 1, 5, 2, 5, 3, 5, PRIMEIRA_CHEGADA, ALEATORIOS);
-        simular("G/G/2/5 (chegada 2..5, atend. 3..5)", 2, 5, 2, 5, 3, 5, PRIMEIRA_CHEGADA, ALEATORIOS);
-
+        // 1) G/G/1/5  chegadas 3..5  atendimento 4..5
         simular("G/G/1/5 (chegada 3..5, atend. 4..5)", 1, 5, 3, 5, 4, 5, PRIMEIRA_CHEGADA, ALEATORIOS);
+
+        // 2) G/G/2/5  chegadas 3..5  atendimento 4..5
         simular("G/G/2/5 (chegada 3..5, atend. 4..5)", 2, 5, 3, 5, 4, 5, PRIMEIRA_CHEGADA, ALEATORIOS);
     }
 }
